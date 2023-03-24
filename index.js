@@ -1,24 +1,33 @@
-const express = require('express')
+const express = require('express');
 const app = express();
 const port = 3000;
 
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
 //this will allow us to serve up static files, CSS, images & JS
 app.use(express.static(__dirname));
 
-//here's a json file of 
+//here's a json file of user data
 var data = require('./data/test.json');
 
-
 app.get('/', (req, res) => {
-  var title = "Home Page";
+  var title= "Home Page";
   res.render('pages/index',{'title':title});
 });
 
-app.get('/about', (req, res) => {
-  var title = "About Page";
-  res.render('pages/about',{'title':title});
+app.get('/exercising', (req, res) => {
+  var title= "Exercising";
+  res.render('pages/exercising',{'title':title});
+});
+
+app.get('/fashion', (req, res) => {
+  var title= "Fashion";
+  res.render('pages/fashion',{'title':title});
+});
+
+app.get('/music', (req, res) => {
+  var title= "Music";
+  res.render('pages/music',{'title':title});
 });
 
 //users index is our list page
@@ -39,6 +48,8 @@ app.get('/users/view/:id', function(req, res) {
      user: data[--id]
  });
 });
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
